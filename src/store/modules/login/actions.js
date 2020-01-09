@@ -1,19 +1,39 @@
-export function addToUserRequest(user) {
-  console.tron.log('entrou_na_action_request');
+export function addToUserRequest(user, users) {
   return {
-    type: 'REQUEST_ADD_TO_USER',
+    type: '@login/REQUEST_ADD_TO_USER',
     payload: {
       user,
+      users,
     },
   };
 }
 
-export function addToUser(user) {
-  console.tron.log('entrou na action denovo');
+export function addToUser(newUser) {
   return {
-    type: 'ADD_TO_USER',
+    type: '@login/ADD_TO_USER',
     payload: {
-      user,
+      newUser,
+    },
+  };
+}
+export function addToUsers(users) {
+  return {
+    type: '@login/ADD_TO_USERS',
+    payload: {
+      users,
+    },
+  };
+}
+export function requestUsersLocal() {
+  return {
+    type: '@login/REQUEST_USERS_LOCAL',
+  };
+}
+export function addToUsersLocal(users) {
+  return {
+    type: '@login/ADD_TO_USERS_LOCAL',
+    payload: {
+      users,
     },
   };
 }

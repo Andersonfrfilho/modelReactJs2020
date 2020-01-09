@@ -2,14 +2,18 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   user: '',
+  users: [],
 };
 
 export default function login(state = INITIAL_STATE, action) {
-  console.tron.log('veio pro reducer');
   switch (action.type) {
-    case 'ADD_TO_USER':
+    case '@login/ADD_TO_USER':
       return produce(state, draft => {
-        draft.push(action.payload.user);
+        draft.users.push(action.payload.newUser);
+      });
+    case '@login/ADD_TO_USERS':
+      return produce(state, draft => {
+        draft.users = [...action.payload.users];
       });
     default:
       return state;
