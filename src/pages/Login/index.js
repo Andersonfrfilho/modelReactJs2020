@@ -1,25 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Form, SubmitButton, List } from './styles';
-import api from '../../services/api';
 import Container from '../../components/Container';
 import * as LoginActions from '../../store/modules/login/actions';
 
 export default function Login() {
-  const { loading, error, message } = useSelector(state => state.common);
+  const { loading } = useSelector(state => state.common);
   const { users } = useSelector(state => state.login);
   const dispatch = useDispatch();
   const [newUser, setNewUser] = useState('');
   useEffect(() => {
-    dispatch(LoginActions.requestUsersLocal());
-   }, []);//eslint-disable-line
-  useMemo(() => {
-    if (users.length !== 0) {
-      dispatch(LoginActions.addToUsersLocal(users));
-    }
-   }, [users]);//eslint-disable-line
+    dispatch(LoginActions.requestUsersExist());
+  }, []); //eslint-disable-line
+  useEffect(() => {
+    localStorage.setItem('Modelo@users', JSON.stringify(users));
+   }, [users]); //eslint-disable-line
   function handleInputChange(text) {
     setNewUser(text.target.value);
   }
@@ -28,7 +25,6 @@ export default function Login() {
     dispatch(LoginActions.addToUserRequest(newUser, users));
     setNewUser('');
   }
-
   return (
     <Container>
       <h1>
@@ -54,9 +50,7 @@ export default function Login() {
         {users.map((user, index) => (
           <li key={index.toString()}>
             <span>{user.name}</span>
-            <Link to={`/Home/${encodeURIComponent(user.username)}`}>
-              Detalhes
-            </Link>
+            <Link to={`/Home/${encodeURIComponent(index)}`}>Detalhes</Link>
           </li>
         ))}
       </List>

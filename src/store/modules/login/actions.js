@@ -24,16 +24,9 @@ export function addToUsers(users) {
     },
   };
 }
-export function requestUsersLocal() {
+
+export function requestUsersExist() {
   return {
-    type: '@login/REQUEST_USERS_LOCAL',
-  };
-}
-export function addToUsersLocal(users) {
-  return {
-    type: '@login/ADD_TO_USERS_LOCAL',
-    payload: {
-      users,
-    },
+    type: '@login/REQUEST_USERS_EXIST',
   };
 }
