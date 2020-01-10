@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Loading, Owner, RepositoryList } from './styles';
 import Container from '../../components/Container';
 import * as HomeActions from '../../store/modules/home/actions';
@@ -45,3 +46,17 @@ export default function Home(props) {
     </Container>
   );
 }
+Home.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      index: PropTypes.string,
+    }),
+  }),
+};
+Home.defaultProps = {
+  match: {
+    params: {
+      index: '0',
+    },
+  },
+};
